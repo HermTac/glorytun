@@ -2,7 +2,13 @@ include(FetchContent)
 
 add_library(
     glorytun_library
-
+    STATIC
+    ../argz/argz.c
+    ../argz/argz.h
+    ../mud/aegis256/aegis256.c
+    ../mud/aegis256/aegis256.h
+    ../mud/mud.c
+    ../mud/mud.h
     argz.c
     argz.h
     bench.c
@@ -29,7 +35,6 @@ target_include_directories(
     PUBLIC
     ../source
 )
-# TODO somehow may libsodium a static library "libsodium.a" and then have CMake use it
 FetchContent_Declare(
     libsodium
     URL https://download.libsodium.org/libsodium/releases/LATEST.tar.gz
@@ -45,10 +50,6 @@ if (NOT libsodium_POPULATED)
         COMMAND make
         WORKING_DIRECTORY ${libsodium_BINARY_DIR}
     )
-    execute_process(
-        COMMAND make install
-        WORKING_DIRECTORY ${libsodium_BINARY_DIR}
-    )
 endif ()
 
 target_include_directories(
@@ -61,7 +62,7 @@ target_include_directories(
 target_link_libraries(
     glorytun_library
     PUBLIC
-    ${libsodium_BINARY_DIR}/libsodium.a
+    ${libsodium_BINARY_DIR}/src/libsodium/.libs/libsodium.a
 )
 
 if (PROJECT_IS_TOP_LEVEL)
