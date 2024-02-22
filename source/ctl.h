@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../mud/mud.h"
+#include "../external/mud/mud.h"
 
 #include <sys/socket.h>
 #include <sys/un.h>

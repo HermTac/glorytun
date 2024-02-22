@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../mud/mud.h"
-#include "../argz/argz.h"
+#include "../external/mud/mud.h"
+#include "../external/argz/argz.h"
 
 #include <netinet/in.h>
 

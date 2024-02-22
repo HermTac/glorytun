@@ -3,12 +3,12 @@ include(FetchContent)
 add_library(
     glorytun_library
     STATIC
-    ../argz/argz.c
-    ../argz/argz.h
-    ../mud/aegis256/aegis256.c
-    ../mud/aegis256/aegis256.h
-    ../mud/mud.c
-    ../mud/mud.h
+    ../external/argz/argz.c
+    ../external/argz/argz.h
+    ../external/mud/aegis256/aegis256.c
+    ../external/mud/aegis256/aegis256.h
+    ../external/mud/mud.c
+    ../external/mud/mud.h
     argz.c
     argz.h
     bench.c
@@ -30,45 +30,21 @@ add_library(
     tun.h
     version.c
 )
+include(../tools/create_libsodium_target.cmake)
+
 target_include_directories(
     glorytun_library
     PUBLIC
     ../source
 )
-FetchContent_Declare(
-    libsodium
-    URL https://download.libsodium.org/libsodium/releases/LATEST.tar.gz
-)
-if (NOT libsodium_POPULATED)
-    FetchContent_Populate(libsodium)
-
-    execute_process(
-        COMMAND ${libsodium_SOURCE_DIR}/configure --host=${CMAKE_SYSTEM_PROCESSOR}
-        WORKING_DIRECTORY ${libsodium_BINARY_DIR}
-    )
-    execute_process(
-        COMMAND make
-        WORKING_DIRECTORY ${libsodium_BINARY_DIR}
-    )
-endif ()
-
-target_include_directories(
-    glorytun_library
-    PUBLIC
-    ${libsodium_SOURCE_DIR}/src/libsodium/include
-    ${libsodium_SOURCE_DIR}/src/libsodium/include/sodium
-    ${libsodium_BINARY_DIR}/src/libsodium/include
-)
 target_link_libraries(
     glorytun_library
     PUBLIC
-    ${libsodium_BINARY_DIR}/src/libsodium/.libs/libsodium.a
+    libsodium
 )
-
 if (PROJECT_IS_TOP_LEVEL)
     add_executable(
         glorytun_executable
-
         main.c
     )
     target_link_libraries(

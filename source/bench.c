@@ -5,7 +5,7 @@
 #include <sodium.h>
 #include <time.h>
 
-#include "../mud/aegis256/aegis256.h"
+#include "../external/mud/aegis256/aegis256.h"
 
 #define NPUBBYTES 32
 #define KEYBYTES  32

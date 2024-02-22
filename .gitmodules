@@ -1,11 +1,6 @@
-[submodule "mud"]
-	path = mud
-	url = https://github.com/angt/mud.git
-	ignore = dirty
-[submodule "argz"]
-	path = argz
+[submodule "external/argz"]
+	path = external/argz
 	url = https://github.com/angt/argz.git
-	ignore = dirty
-[submodule "external/libsodium"]
-	path = external/libsodium
-	url = https://github.com/jedisct1/libsodium.git
+[submodule "external/mud"]
+	path = external/mud
+	url = https://github.com/angt/mud.git
