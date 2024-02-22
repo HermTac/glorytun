@@ -1,0 +1,41 @@
+
+add_library(
+        glorytun_library
+
+        argz.c
+        argz.h
+        bench.c
+        bind.c
+        common.c
+        common.h
+        ctl.c
+        ctl.h
+        iface.c
+        iface.h
+        ip.h
+        keygen.c
+        list.c
+        main.c
+        path.c
+        set.c
+        show.c
+        tun.c
+        tun.h
+        version.c
+)
+target_include_directories(
+        glorytun_library
+        PUBLIC
+)
+if(PROJECT_IS_TOP_LEVEL)
+    add_executable(
+            glorytun_executable
+
+            main.c
+    )
+    target_link_libraries(
+            glorytun_executable
+            PRIVATE
+            glorytun_library
+    )
+endif()

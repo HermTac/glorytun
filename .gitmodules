@@ -6,3 +6,6 @@
 	path = argz
 	url = https://github.com/angt/argz.git
 	ignore = dirty
+[submodule "external/libsodium"]
+	path = external/libsodium
+	url = https://github.com/jedisct1/libsodium.git
